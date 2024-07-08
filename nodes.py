@@ -101,9 +101,9 @@ class uncondZeroNode:
                     cond[b] = normalized_pow(cond[b], exp_scale)
 
                 for c in range(len(cond[b])):
-                    if not first_step and pre_fix:
+                    if not first_step and pre_fix and prev_cond is not None:
                         cond[b][c] = normalize_adjust(cond[b][c], prev_cond[b][c], pre_scale)
-                    mes = topk_average(cond[b][c]) ** 0.5 # the square root is to dampen the variations
+                    mes = topk_average(cond[b][c]) ** 0.5
                     result[b][c] = x_orig[b][c] - cond[b][c] * scale / mes
 
             prev_cond = cond
